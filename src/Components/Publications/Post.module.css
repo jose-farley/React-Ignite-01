@@ -1,0 +1,113 @@
+.post {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    background-color: var(--gray-800);
+    border-radius: 8px;
+    padding: 2rem 2rem;
+    padding-bottom: 1rem;
+
+}
+.post + .post {
+    margin-top: 2rem;
+    
+}
+.profilePicture {
+    box-sizing: initial;
+    margin-top:-1.8rem;
+    height: 3rem;
+    border-radius: 8px;
+    border: 4px solid var(--gray-800);
+    outline: 2px solid var(--green);
+}
+.header{
+    margin-top: 2rem;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.postAuthor {
+    display: flex;
+    flex-direction: row;
+}
+.profileInfo {
+    margin-top: -1.6rem;
+    margin-left: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.profileInfo strong {
+    line-height: 1.6;
+}
+.profileInfo span {
+    line-height: 1.6;
+    font-weight: 400;
+    color: var(--gray-400);
+}
+.subText {
+    line-height: 1.6;
+    font-weight: 400;
+    color: var(--gray-400);
+    margin-top: -0.5rem;
+}
+
+.content p{
+  line-height: 1.6;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+.content a{
+    line-height: 1.6;
+    font-weight: bold;
+    color: var(--green);
+    text-decoration: none;
+}
+.commentForm {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--gray-600);
+}
+.commentForm > strong {
+    line-height: 1.6;
+    color:var(--gray-100);
+}
+.commentForm textarea {
+    width: 100%;
+    background-color: var(--gray-900);
+    border: 0;
+    resize: none;
+    height: 6rem;
+    padding: 1rem;
+    border-radius: 8px;
+    color: var(--gray-100);
+    line-height: 1.4;
+    margin-top: 1rem;
+}
+.commentForm button {
+    width: 6.75rem;
+    height: 3.0625rem;
+    border-radius: 8px;
+    background-color: var(--green);
+    padding: 1rem 1.5rem;
+    color: var(--white);
+    border: none;
+    margin-top: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    
+}
+.commentForm footer {
+    visibility: hidden;
+    max-height: 0;
+}
+.commentForm button:hover {
+   background-color: var(--green-300);
+}
+.commentForm:focus-within footer{
+    visibility: visible;
+    max-height: none;
+}

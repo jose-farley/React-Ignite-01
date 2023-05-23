@@ -1,5 +1,5 @@
 import style from './Header.module.css'
-import igniteLogo from '../assets/igniteLogo.png'
+import igniteLogo from '../../assets/igniteLogo.png'
 export function Header(){
     return (
         <header className={style.header}>

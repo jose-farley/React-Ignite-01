@@ -8,8 +8,12 @@
     --gray-800:#202024;
     --gray-900:#121214;
     --green:#00875f;
+    --green-300:#02a977;
 }
-
+:focus {
+    outline: transparent;
+    box-shadow: 0 0 0 2px var(--green);
+}
 * {
     margin: 0;
     padding: 0;
@@ -20,6 +24,7 @@ body {
     background-color: var(--gray-900);
     color: var(--gray-300);
     -webkit-font-smoothing:antialiased;
+    overflow-x: hidden;
 }
 body, input, textarea {
     font-family: 'Roboto', sans-serif;
