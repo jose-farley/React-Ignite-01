@@ -9,6 +9,7 @@
     --gray-900:#121214;
     --green:#00875f;
     --green-300:#02a977;
+    --red-500: #F75A68
 }
 :focus {
     outline: transparent;
