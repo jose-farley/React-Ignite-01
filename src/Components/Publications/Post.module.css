@@ -12,18 +12,9 @@
     margin-top: 2rem;
     
 }
-.profilePicture {
-    box-sizing: initial;
-    margin-top:-1.8rem;
-    height: 3rem;
-    border-radius: 8px;
-    border: 4px solid var(--gray-800);
-    outline: 2px solid var(--green);
-}
-.header{
-    margin-top: 2rem;
-    height: fit-content;
+.header {
     display: flex;
+    margin-top: 1rem;
     flex-direction: row;
     justify-content: space-between;
 }
@@ -32,7 +23,6 @@
     flex-direction: row;
 }
 .profileInfo {
-    margin-top: -1.6rem;
     margin-left: 0.6rem;
     display: flex;
     flex-direction: column;
