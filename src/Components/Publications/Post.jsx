@@ -15,8 +15,12 @@ import { Comment } from '../Comment/Comment'
 import { Avatar } from '../Avatar/Avatar'
 import {format, formatDistanceToNow} from 'date-fns'
 import ptbr from 'date-fns/locale/pt-BR'
+import { useState } from 'react'
 export function Post({author, publishedAt, content}){
-    console.log(publishedAt)
+    const [comments, setComment] = useState([
+        1,
+        2,  
+    ])
   const publishedDateFormat = format(publishedAt, "dd 'de' LLLL 'às' HH:mm'h' ", {
     locale:ptbr,
   })
@@ -24,6 +28,11 @@ export function Post({author, publishedAt, content}){
     locale:ptbr,
     addSuffix:true
   }) 
+  function handleCommentSubmit(event){
+    event.preventDefault()
+    alert('Comentário enviado') 
+    setComment([...comments, comments.length + 1])
+  }
   return (
         <div className={style.post}>
             <div className={style.header}>
@@ -49,7 +58,7 @@ export function Post({author, publishedAt, content}){
                 }
              })}
             </div>
-            <form className={style.commentForm} action="">
+            <form onSubmit={handleCommentSubmit} className={style.commentForm} action="">
                 <strong>Deixe seu feedback</strong>
                 <textarea placeholder='Deixe seu comentário'/>
                 <footer>
@@ -58,9 +67,9 @@ export function Post({author, publishedAt, content}){
                 
             </form>
             <div className={style.commentList}>
-                <Comment/>
-                <Comment/>
-                <Comment/>
+                {comments.map(comment => {
+                    return <Comment/>
+                })}
             </div>
         </div>   
     )
