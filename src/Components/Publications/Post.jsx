@@ -18,9 +18,9 @@ import ptbr from 'date-fns/locale/pt-BR'
 import { useState } from 'react'
 export function Post({author, publishedAt, content}){
     const [comments, setComment] = useState([
-        1,
-        2,  
+       "ótimo post, parabéns!" 
     ])
+    const [newComment, setNewComment] = useState('')
   const publishedDateFormat = format(publishedAt, "dd 'de' LLLL 'às' HH:mm'h' ", {
     locale:ptbr,
   })
@@ -30,8 +30,11 @@ export function Post({author, publishedAt, content}){
   }) 
   function handleCommentSubmit(event){
     event.preventDefault()
-    alert('Comentário enviado') 
-    setComment([...comments, comments.length + 1])
+    setComment([...comments, newComment])
+    setNewComment("")
+  }
+  function newCommentChange(event){
+    setNewComment(event.target.value)
   }
   return (
         <div className={style.post}>
@@ -51,24 +54,24 @@ export function Post({author, publishedAt, content}){
             <div className={style.content}>
              {content.map(line=>{
                 if(line.type == "paragraph"){
-                    return <p>{line.content}</p>
+                    return <p key={Math.random()}>{line.content}</p>
                 }
                 if(line.type=="link"){
-                    return <p><a href="#">{line.content}</a></p>
+                    return <p key={Math.random()}><a href="#">{line.content}</a></p>
                 }
              })}
             </div>
             <form onSubmit={handleCommentSubmit} className={style.commentForm} action="">
                 <strong>Deixe seu feedback</strong>
-                <textarea placeholder='Deixe seu comentário'/>
+                <textarea onChange={newCommentChange} name="commentText" placeholder='Deixe seu comentário'
+                value={newComment}/>
                 <footer>
                     <button type='submit'>Publicar</button>
-                </footer>
-                
+                </footer>  
             </form>
             <div className={style.commentList}>
                 {comments.map(comment => {
-                    return <Comment/>
+                    return <Comment key={Math.random()} content={comment}/>
                 })}
             </div>
         </div>   
