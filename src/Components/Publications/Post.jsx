@@ -21,22 +21,34 @@ export function Post({author, publishedAt, content}){
        "ótimo post, parabéns!" 
     ])
     const [newComment, setNewComment] = useState('')
-  const publishedDateFormat = format(publishedAt, "dd 'de' LLLL 'às' HH:mm'h' ", {
+    const publishedDateFormat = format(publishedAt, "dd 'de' LLLL 'às' HH:mm'h' ", {
     locale:ptbr,
-  })
-  const publishedDateRelativeNow = formatDistanceToNow(publishedAt, {
+    })
+    const publishedDateRelativeNow = formatDistanceToNow(publishedAt, {
     locale:ptbr,
     addSuffix:true
-  }) 
-  function handleCommentSubmit(event){
+    }) 
+    function handleCommentSubmit(event){
     event.preventDefault()
     setComment([...comments, newComment])
     setNewComment("")
-  }
-  function newCommentChange(event){
+    }
+    function newCommentChange(event){
+    event.target.setCustomValidity("")
     setNewComment(event.target.value)
-  }
-  return (
+    }
+    function onDeleteComment(commentToDelete){
+    
+    const newCommentWithoutDeletedOne = comments.filter(comment =>{
+        if(comment != commentToDelete) return comment
+    })
+    setComment(newCommentWithoutDeletedOne)
+    }
+    function handleInvalidComment(event){
+    event.target.setCustomValidity("Este campo é obrigatório!")
+    }
+    let isNewCommentEmpty = (newComment.length == 0)?true:false
+    return (
         <div className={style.post}>
             <div className={style.header}>
                 <div className={style.postAuthor}>
@@ -63,15 +75,15 @@ export function Post({author, publishedAt, content}){
             </div>
             <form onSubmit={handleCommentSubmit} className={style.commentForm} action="">
                 <strong>Deixe seu feedback</strong>
-                <textarea onChange={newCommentChange} name="commentText" placeholder='Deixe seu comentário'
+                <textarea onInvalid={handleInvalidComment} required onChange={newCommentChange} name="commentText" placeholder='Deixe seu comentário'
                 value={newComment}/>
                 <footer>
-                    <button type='submit'>Publicar</button>
+                    <button disabled={isNewCommentEmpty} type='submit'>Publicar</button>
                 </footer>  
             </form>
             <div className={style.commentList}>
                 {comments.map(comment => {
-                    return <Comment key={Math.random()} content={comment}/>
+                    return <Comment onDeleteComment={onDeleteComment} key={Math.random()} content={comment}/>
                 })}
             </div>
         </div>   

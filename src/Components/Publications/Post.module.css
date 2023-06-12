@@ -90,11 +90,15 @@
     font-weight: bold;
     
 }
+.commentForm button:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+}
 .commentForm footer {
     visibility: hidden;
     max-height: 0;
 }
-.commentForm button:hover {
+.commentForm button:not(:disabled)hover {
    background-color: var(--green-300);
 }
 .commentForm:focus-within footer{
