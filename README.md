@@ -3,6 +3,8 @@
 ## Introdução
 Esse é o primeiro projeto do curso de React da Rocketseat.
 
+Você pode visualizar como projeto ficou neste link: https://react-ignite-01.onrender.com/
+
 ## Como rodar
 
 Clone o repositório com o seguinte comando:
