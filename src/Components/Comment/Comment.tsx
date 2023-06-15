@@ -3,14 +3,17 @@ import {Trash, ThumbsUp} from '@phosphor-icons/react'
 import { Avatar } from '../Avatar/Avatar'
 import { useState } from 'react'
 
+interface CommentProps{
+    content:string
+    onDeleteComment:(commentToDelete:string)=>void
+}
 
-
-export function Comment({content, onDeleteComment}){
+export function Comment({content, onDeleteComment}:CommentProps){
     let [applause ,setApplause] = useState(0)
-    function handleDeleteComment(event){
+    function handleDeleteComment(){
         onDeleteComment(content)
     }
-    function handleCommentApplause(event){
+    function handleCommentApplause(){
         setApplause((state)=> { return state + 1})
     }
     return (

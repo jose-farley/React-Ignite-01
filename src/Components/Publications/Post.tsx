@@ -15,36 +15,56 @@ import { Comment } from '../Comment/Comment'
 import { Avatar } from '../Avatar/Avatar'
 import {format, formatDistanceToNow} from 'date-fns'
 import ptbr from 'date-fns/locale/pt-BR'
-import { useState } from 'react'
-export function Post({author, publishedAt, content}){
+import { FormEvent, useState, ChangeEvent, InvalidEvent} from 'react'
+
+interface Author {
+    name:string
+    role:string
+    avatarUrl:string
+}
+interface Content {
+    type:'paragraph'|'link'
+    content:string
+}
+
+export interface IPost{
+    id:number
+    author:Author
+    publishedAt:Date
+    content:Content[] 
+}
+interface PostProps {
+    post:IPost
+ }
+export function Post({post}:PostProps){
     const [comments, setComment] = useState([
        "ótimo post, parabéns!" 
     ])
     const [newComment, setNewComment] = useState('')
-    const publishedDateFormat = format(publishedAt, "dd 'de' LLLL 'às' HH:mm'h' ", {
+    const publishedDateFormat = format(post.publishedAt, "dd 'de' LLLL 'às' HH:mm'h' ", {
     locale:ptbr,
     })
-    const publishedDateRelativeNow = formatDistanceToNow(publishedAt, {
+    const publishedDateRelativeNow = formatDistanceToNow(post.publishedAt, {
     locale:ptbr,
     addSuffix:true
     }) 
-    function handleCommentSubmit(event){
+    function handleCommentSubmit(event:FormEvent){
     event.preventDefault()
     setComment([...comments, newComment])
     setNewComment("")
     }
-    function newCommentChange(event){
+    function newCommentChange(event:ChangeEvent<HTMLTextAreaElement>){
     event.target.setCustomValidity("")
     setNewComment(event.target.value)
     }
-    function onDeleteComment(commentToDelete){
+    function onDeleteComment(commentToDelete:string){
     
     const newCommentWithoutDeletedOne = comments.filter(comment =>{
         if(comment != commentToDelete) return comment
     })
     setComment(newCommentWithoutDeletedOne)
     }
-    function handleInvalidComment(event){
+    function handleInvalidComment(event:InvalidEvent<HTMLTextAreaElement>){
     event.target.setCustomValidity("Este campo é obrigatório!")
     }
     let isNewCommentEmpty = (newComment.length == 0)?true:false
@@ -52,19 +72,19 @@ export function Post({author, publishedAt, content}){
         <div className={style.post}>
             <div className={style.header}>
                 <div className={style.postAuthor}>
-                    <Avatar path={author.avatarUrl} /> 
+                    <Avatar path={post.author.avatarUrl}/> 
                     <div className={style.profileInfo}>
-                        <strong>{author.name}</strong>
-                        <span>{author.role}</span>
+                        <strong>{post.author.name}</strong>
+                        <span>{post.author.role}</span>
                     </div>
                 </div>
                
-                <time title={publishedDateFormat} dateTime={publishedAt.toISOString()} className={style.subText}>
+                <time title={publishedDateFormat} dateTime={post.publishedAt.toISOString()} className={style.subText}>
                     {publishedDateRelativeNow}
                 </time>
             </div>
             <div className={style.content}>
-             {content.map(line=>{
+             {post.content.map(line=>{
                 if(line.type == "paragraph"){
                     return <p key={Math.random()}>{line.content}</p>
                 }

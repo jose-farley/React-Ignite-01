@@ -1,10 +1,10 @@
 import "./global.css"
 import style from './App.module.css'
 import { Header } from "./Components/Header/Header"
-import { Post } from "./Components/Publications/Post"
+import { IPost, Post } from "./Components/Publications/Post"
 import { Sidebar } from "./Components/Sidebar/Sidebar"
 
-const posts = [
+const posts:IPost[] = [
   {
     id:1,
     author:{
@@ -32,9 +32,7 @@ export function App() {
             posts.map(post => {
               return (<Post 
                   key={post.id}
-                  author={post.author}
-                  content={post.content}
-                  publishedAt={post.publishedAt}
+                  post={post}
                 />)
             })
           }
